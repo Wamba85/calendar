@@ -11,7 +11,7 @@ describe('Calendar', () => {
     )
   })
 
-  it('should render a div', () => {
-    expect(wrapper.find('div').length).toEqual(1)
+  it('should render 8 divs', () => {
+    expect(wrapper.find('div').length).toEqual(8)
   })
 })
