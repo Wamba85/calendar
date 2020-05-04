@@ -1,9 +1,17 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { shallow, ShallowWrapper } from 'enzyme';
 import App from './App';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('should render Calendar', () => {
+  let wrapper: ShallowWrapper
+
+  beforeEach(() => {
+    wrapper = shallow(
+      <App />
+    )
+  })
+
+  it('should render a Calendar', () => {
+    expect(wrapper.find('Calendar').length).toEqual(1)
+  })
 });
