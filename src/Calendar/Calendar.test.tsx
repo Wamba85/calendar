@@ -1,14 +1,12 @@
 import React from 'react'
-import { shallow, ShallowWrapper } from 'enzyme';
+import { shallow, ShallowWrapper } from 'enzyme'
 import Calendar from './Calendar'
 
 describe('Calendar', () => {
   let wrapper: ShallowWrapper
 
   beforeEach(() => {
-    wrapper = shallow(
-      <Calendar />
-    )
+    wrapper = shallow(<Calendar />)
   })
 
   it('should render 32 divs', () => {
