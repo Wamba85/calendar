@@ -3,7 +3,7 @@ import styles from './Calendar.module.css'
 
 type Props = {
   weekdays: number[]
-  timeslot: number
+  timeslot: 5 | 6 | 8 | 9 | 10 | 12 | 15 | 16 | 18 | 20 | 24 | 30 | 32 | 36 | 40 | 45 | 48 | 60
 }
 const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
   const eventCols = []
