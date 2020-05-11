@@ -5,7 +5,7 @@ import Calendar from './Calendar/Calendar'
 function App(): JSX.Element {
   return (
     <div className="App">
-      <Calendar />
+      <Calendar timeslot={30} weekdays={[12, 13, 14, 15, 16, 17, 18]} />
     </div>
   )
 }
