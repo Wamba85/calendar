@@ -1,0 +1,24 @@
+.weekdayContainer {
+  width: 100%;
+  display: flex;
+}
+
+.weekday {
+  flex: 1 1 0;
+}
+
+.eventColsContainer {
+  width: 100%;
+  display: flex;
+}
+
+.eventCol,
+.timetablesContainer {
+  flex: 1 1 0;
+}
+
+.eventSlot,
+.timetable {
+  border-top: 0.1px solid #dadce0;
+  border-right: 0.1px solid #dadce0;
+}
