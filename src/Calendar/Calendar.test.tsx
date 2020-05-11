@@ -6,20 +6,29 @@ describe('Calendar', () => {
   let wrapper: ShallowWrapper
 
   beforeEach(() => {
-    wrapper = shallow(<Calendar />)
+    wrapper = shallow(<Calendar timeslot={60} weekdays={[]} />)
   })
 
-  it('should have week days text', () => {
-    expect(wrapper.find('.weekday').first().text()).toBe('')
-    expect(wrapper.find('.weekday').last().text()).toBe('Sat')
+  it('should have timetables based on timeslot', () => {
+    expect(wrapper.find('.timetable').first().text()).toBe('0:00')
+    expect(wrapper.find('.timetable').at(1).text()).toBe('1:00')
+    expect(wrapper.find('.timetable').length).toEqual(24)
+    wrapper.setProps({ timeslot: 30 })
+    expect(wrapper.find('.timetable').length).toEqual(48)
   })
 
-  it('should have timetables', () => {
-    expect(wrapper.find('.timetable').first().text()).toBe('00:00')
-    expect(wrapper.find('.timetable').at(1).text()).toBe('01:00')
+  it('should have timetable length times 7 event slots', () => {
+    let timetablesLength = wrapper.find('.timetable').length
+    expect(wrapper.find('.eventSlot').length).toEqual(timetablesLength * 7)
+    wrapper.setProps({ timeslot: 30 })
+    timetablesLength = wrapper.find('.timetable').length
+    expect(wrapper.find('.eventSlot').length).toEqual(timetablesLength * 7)
   })
 
-  it('should have 168 slots', () => {
-    expect(wrapper.find('.eventSlot').length).toEqual(168)
+  it('should renderer weekdays', () => {
+    wrapper.setProps({ weekdays: [12, 13, 14, 15, 16, 17, 18] })
+    expect(wrapper.find('.weekdayNumber').at(0).text()).toBe('12')
+    expect(wrapper.find('.weekdayString').first().text()).toBe('Sun')
+    expect(wrapper.find('.weekdayString').last().text()).toBe('Sat')
   })
 })
