@@ -9,17 +9,17 @@ describe('Calendar', () => {
     wrapper = shallow(<Calendar />)
   })
 
-  it('should render 32 divs', () => {
-    expect(wrapper.find('div').length).toEqual(32)
-  })
-
   it('should have week days text', () => {
-    expect(wrapper.find('.weekday').first().text()).toBe('Sun')
+    expect(wrapper.find('.weekday').first().text()).toBe('')
     expect(wrapper.find('.weekday').last().text()).toBe('Sat')
   })
 
   it('should have timetables', () => {
-    expect(wrapper.find('.timetables').first().text()).toBe('00:00')
-    expect(wrapper.find('.timetables').at(1).text()).toBe('01:00')
+    expect(wrapper.find('.timetable').first().text()).toBe('00:00')
+    expect(wrapper.find('.timetable').at(1).text()).toBe('01:00')
+  })
+
+  it('should have 168 slots', () => {
+    expect(wrapper.find('.eventSlot').length).toEqual(168)
   })
 })
