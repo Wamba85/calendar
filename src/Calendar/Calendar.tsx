@@ -1,11 +1,30 @@
 import React from 'react'
 import styles from './Calendar.module.css'
 
-const Calendar = (): JSX.Element => {
+type Props = {
+  weekdays: number[]
+  timeslot: number
+}
+const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
   const eventCols = []
+  const slotNumber = 1440 / timeslot
+  const timeTables = []
+  for (let i = 0; i < slotNumber; i++) {
+    const minutes = timeslot * i
+    let m = minutes % 60
+    const h = (minutes - m) / 60
+    let sm = m.toString()
+    if (m < 10) sm = '0' + m
+    const time = `${h}:${sm}`
+    timeTables.push(
+      <div key={`timetable${time}`} className={styles.timetable}>
+        {time}
+      </div>,
+    )
+  }
   for (let i = 0; i < 7; i++) {
     let eventSlots = []
-    for (let j = 0; j < 24; j++) {
+    for (let j = 0; j < slotNumber; j++) {
       eventSlots.push(<div key={`event${i}-${j}`} className={styles.eventSlot}>{`${i}-${j}`}</div>)
     }
     eventCols.push(
@@ -14,45 +33,22 @@ const Calendar = (): JSX.Element => {
       </div>,
     )
   }
+  const weekDaysString = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+  const weekDays = weekdays.map((day, i) => {
+    return (
+      <div key={`${weekDaysString[i]}-${day}`} className={styles.weekday}>
+        <div className={styles.weekdayString}>{weekDaysString[i]}</div>
+        <div className={styles.weekdayNumber}>{day}</div>
+      </div>
+    )
+  })
+  weekDays.unshift(<div key="blankDay" className={styles.weekday}></div>)
+
   return (
     <div>
-      <div className={styles.weekdayContainer}>
-        <div className={styles.weekday}></div>
-        <div className={styles.weekday}>Sun</div>
-        <div className={styles.weekday}>Mon</div>
-        <div className={styles.weekday}>Tue</div>
-        <div className={styles.weekday}>Wed</div>
-        <div className={styles.weekday}>Thu</div>
-        <div className={styles.weekday}>Fri</div>
-        <div className={styles.weekday}>Sat</div>
-      </div>
+      <div className={styles.weekdayContainer}>{weekDays}</div>
       <div className={styles.eventColsContainer}>
-        <div className={styles.timetablesContainer}>
-          <div className={styles.timetable}>00:00</div>
-          <div className={styles.timetable}>01:00</div>
-          <div className={styles.timetable}>02:00</div>
-          <div className={styles.timetable}>03:00</div>
-          <div className={styles.timetable}>04:00</div>
-          <div className={styles.timetable}>05:00</div>
-          <div className={styles.timetable}>06:00</div>
-          <div className={styles.timetable}>07:00</div>
-          <div className={styles.timetable}>08:00</div>
-          <div className={styles.timetable}>09:00</div>
-          <div className={styles.timetable}>10:00</div>
-          <div className={styles.timetable}>11:00</div>
-          <div className={styles.timetable}>12:00</div>
-          <div className={styles.timetable}>13:00</div>
-          <div className={styles.timetable}>14:00</div>
-          <div className={styles.timetable}>15:00</div>
-          <div className={styles.timetable}>16:00</div>
-          <div className={styles.timetable}>17:00</div>
-          <div className={styles.timetable}>18:00</div>
-          <div className={styles.timetable}>19:00</div>
-          <div className={styles.timetable}>20:00</div>
-          <div className={styles.timetable}>21:00</div>
-          <div className={styles.timetable}>22:00</div>
-          <div className={styles.timetable}>23:00</div>
-        </div>
+        <div className={styles.timetablesContainer}>{timeTables}</div>
         {eventCols}
       </div>
     </div>
