@@ -16,5 +16,10 @@ pipeline {
         sh 'npm install'
       }
     }
+    stage('Test') {
+      steps {
+          sh './test.sh'
+      }
+    }
   }
 }
