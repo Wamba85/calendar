@@ -6,6 +6,10 @@ pipeline {
     }
 
   }
+  environment {
+    CI = 'true'
+    HOME = '.'
+  }
   stages {
     stage('Build') {
       steps {
@@ -19,9 +23,5 @@ pipeline {
       }
     }
 
-  }
-  environment {
-    CI = 'true'
-    HOME = '.'
   }
 }
