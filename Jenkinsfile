@@ -7,11 +7,11 @@ pipeline {
     }
     environment {
         CI = 'true' 
+        HOME = '.'
     }
     stages {
         stage('Build') {
             steps {
-                sh 'npm cache clean --force'
                 sh 'npm install'
             }
         }
