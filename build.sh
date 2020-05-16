@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 set -x
-npm install -g eslint
+npm install --save-dev eslint
 set +x
 
 set -x
