@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'workspace'
+    label 'master'
   }
   environment {
     CI = 'true'
