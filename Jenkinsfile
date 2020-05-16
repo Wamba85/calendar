@@ -5,7 +5,7 @@ pipeline {
     HOME = '.'
   }
   stages {
-    stage('Build') {
+    stage('Install') {
       agent {
         docker {
           image 'node:latest'
@@ -14,8 +14,6 @@ pipeline {
       }
       steps {
         sh 'npm install'
-        sh 'chmod +x build.sh'
-        sh './build.sh'
       }
     }
     stage('Test') {
@@ -28,6 +26,18 @@ pipeline {
       steps {
           sh 'chmod +x test.sh'
           sh './test.sh'
+      }
+    }
+    stage('Build') {
+      agent {
+        docker {
+          image 'node:latest'
+          args '-p 3000:3000'
+        }
+      }
+      steps {
+        sh 'chmod +x build.sh'
+        sh './build.sh'
       }
     }
     stage('Dockerize app') {
