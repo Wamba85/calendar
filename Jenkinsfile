@@ -14,7 +14,8 @@ pipeline {
       }
       steps {
         sh 'npm install'
-        sh 'npm run build'
+        sh 'chmod +x build.sh'
+        sh './build.sh'
       }
     }
     stage('Test') {
