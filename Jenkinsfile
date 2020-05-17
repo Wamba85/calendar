@@ -10,7 +10,7 @@ pipeline {
       agent {
         docker {
           image 'node:latest'
-          args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
+          reuseNode true
         }
       }
       steps {
@@ -21,7 +21,7 @@ pipeline {
       agent {
         docker {
           image 'node:latest'
-          args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
+          reuseNode true
         }
       }
       steps {
@@ -33,7 +33,7 @@ pipeline {
       agent {
         docker {
           image 'node:latest'
-          args '-p 3000:3000 -v /var/run/docker.sock:/var/run/docker.sock'
+          reuseNode true
         }
       }
       steps {
