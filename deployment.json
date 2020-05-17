@@ -1,0 +1,37 @@
+{
+  "kind": "Deployment",
+  "apiVersion": "apps/v1",
+  "metadata": {
+    "name": "calendar-app"
+  },
+  "spec": {
+    "replicas": 2,
+    "selector": {
+      "matchLabels": {
+        "app": "calendar-app"
+      }
+    },
+    "template": {
+      "metadata": {
+        "labels": {
+          "app": "calendar-app"
+        }
+      },
+      "spec": {
+        "containers": [
+          {
+            "name": "calendar-app",
+            "image": "wamba/calendar-app",
+            "imagePullPolicy": "Always",
+            "ports": [
+              {
+                "containerPort": 80
+              }
+            ]
+          }
+        ],
+        "restartPolicy": "Always"
+      }
+    }
+  }
+}
