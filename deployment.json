@@ -1,15 +1,16 @@
 {
-  "kind": "Deployment",
-  "apiVersion": "apps/v1",
+  "kind": "ReplicationController",
+  "apiVersion": "v1",
   "metadata": {
-    "name": "calendar-app"
+    "name": "calendar-app",
+    "labels": {
+      "app": "calendar-app"
+    }
   },
   "spec": {
     "replicas": 2,
     "selector": {
-      "matchLabels": {
-        "app": "calendar-app"
-      }
+      "app": "calendar-app"
     },
     "template": {
       "metadata": {
@@ -22,15 +23,14 @@
           {
             "name": "calendar-app",
             "image": "wamba/calendar-app",
-            "imagePullPolicy": "Always",
             "ports": [
               {
+                "name": "http-server",
                 "containerPort": 80
               }
             ]
           }
-        ],
-        "restartPolicy": "Always"
+        ]
       }
     }
   }
