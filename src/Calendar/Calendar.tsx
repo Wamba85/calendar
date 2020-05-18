@@ -22,10 +22,19 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
       </div>,
     )
   }
+  const logText = (text: string): void => {
+    console.log(text)
+  }
   for (let i = 0; i < 7; i++) {
     const eventSlots = []
     for (let j = 0; j < slotNumber; j++) {
-      eventSlots.push(<div key={`event${i}-${j}`} className={styles.eventSlot}>{`${i}-${j}`}</div>)
+      eventSlots.push(
+        <div
+          key={`event${i}-${j}`}
+          onClick={(): void => logText(`event${i}-${j}`)}
+          className={styles.eventSlot}
+        >{`${i}-${j}`}</div>,
+      )
     }
     eventCols.push(
       <div key={`eventCol${i}`} className={styles.eventCol}>
