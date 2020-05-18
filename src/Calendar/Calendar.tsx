@@ -11,7 +11,7 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
   const timeTables = []
   for (let i = 0; i < slotNumber; i++) {
     const minutes = timeslot * i
-    let m = minutes % 60
+    const m = minutes % 60
     const h = (minutes - m) / 60
     let sm = m.toString()
     if (m < 10) sm = '0' + m
@@ -23,7 +23,7 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
     )
   }
   for (let i = 0; i < 7; i++) {
-    let eventSlots = []
+    const eventSlots = []
     for (let j = 0; j < slotNumber; j++) {
       eventSlots.push(<div key={`event${i}-${j}`} className={styles.eventSlot}>{`${i}-${j}`}</div>)
     }
