@@ -31,4 +31,11 @@ describe('Calendar', () => {
     expect(wrapper.find('.weekdayString').first().text()).toBe('Sun')
     expect(wrapper.find('.weekdayString').last().text()).toBe('Sat')
   })
+
+  it('should emit an event on eventslot click', () => {
+    const spy = jest.spyOn(console, 'log')
+    expect(spy).toHaveBeenCalledTimes(0)
+    wrapper.find('.eventSlot').first().simulate('click')
+    expect(spy).toHaveBeenCalledWith('event0-0')
+  })
 })
