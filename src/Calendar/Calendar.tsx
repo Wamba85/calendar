@@ -1,11 +1,21 @@
 import React from 'react'
 import styles from './Calendar.module.css'
+import Modal from '../Modal/Modal'
 
 type Props = {
   weekdays: number[]
   timeslot: 5 | 6 | 8 | 9 | 10 | 12 | 15 | 16 | 18 | 20 | 24 | 30 | 32 | 36 | 40 | 45 | 48 | 60
 }
 const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
+  const [open, setOpen] = React.useState(false)
+
+  const handleClickOpen = (): void => {
+    setOpen(true)
+  }
+
+  const handleClose = (): void => {
+    setOpen(false)
+  }
   const eventCols = []
   const slotNumber = 1440 / timeslot
   const timeTables = []
@@ -22,18 +32,11 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
       </div>,
     )
   }
-  const logText = (text: string): void => {
-    console.log(text)
-  }
   for (let i = 0; i < 7; i++) {
     const eventSlots = []
     for (let j = 0; j < slotNumber; j++) {
       eventSlots.push(
-        <div
-          key={`event${i}-${j}`}
-          onClick={(): void => logText(`event${i}-${j}`)}
-          className={styles.eventSlot}
-        >{`${i}-${j}`}</div>,
+        <div key={`event${i}-${j}`} onClick={handleClickOpen} className={styles.eventSlot}>{`${i}-${j}`}</div>,
       )
     }
     eventCols.push(
@@ -60,6 +63,7 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
         <div className={styles.timetablesContainer}>{timeTables}</div>
         {eventCols}
       </div>
+      <Modal open={open} handleClose={handleClose}></Modal>
     </div>
   )
 }
