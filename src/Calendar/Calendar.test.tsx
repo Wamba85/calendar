@@ -4,9 +4,18 @@ import Calendar from './Calendar'
 
 describe('Calendar', () => {
   let wrapper: ShallowWrapper
+  const setState = jest.fn()
+  const useStateSpy = jest.spyOn(React, 'useState')
+  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // @ts-ignore @typescript-eslint/no-explicit-any
+  useStateSpy.mockImplementation((init) => [init, setState])
 
   beforeEach(() => {
     wrapper = shallow(<Calendar timeslot={60} weekdays={[]} />)
+  })
+
+  afterEach(() => {
+    jest.clearAllMocks()
   })
 
   it('should have timetables based on timeslot', () => {
@@ -32,10 +41,8 @@ describe('Calendar', () => {
     expect(wrapper.find('.weekdayString').last().text()).toBe('Sat')
   })
 
-  it('should emit an event on eventslot click', () => {
-    const spy = jest.spyOn(console, 'log')
-    expect(spy).toHaveBeenCalledTimes(0)
+  it('should emit an event on eventslot click and open a dialog', () => {
     wrapper.find('.eventSlot').first().simulate('click')
-    expect(spy).toHaveBeenCalledWith('event0-0')
+    expect(setState).toHaveBeenCalledWith(true)
   })
 })
