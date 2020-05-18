@@ -19,12 +19,12 @@
 
 .eventSlot,
 .timetable {
-  border-top: 0.1px solid #dadce0;
-  border-right: 0.1px solid #dadce0;
+  border-top: 1px solid #dadce0;
+  border-right: 1px solid #dadce0;
 }
 
 .timeSpan {
-  font-size: 4px;
+  font-size: 8px;
   position: relative;
-  top: -7px;
+  top: -14px;
 }
