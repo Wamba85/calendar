@@ -22,3 +22,9 @@
   border-top: 0.1px solid #dadce0;
   border-right: 0.1px solid #dadce0;
 }
+
+.timeSpan {
+  font-size: 4px;
+  position: relative;
+  top: -7px;
+}

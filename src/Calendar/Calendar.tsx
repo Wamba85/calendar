@@ -18,7 +18,7 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
     const time = `${h}:${sm}`
     timeTables.push(
       <div key={`timetable${time}`} className={styles.timetable}>
-        {time}
+        <span className={styles.timeSpan}>{time}</span>
       </div>,
     )
   }
