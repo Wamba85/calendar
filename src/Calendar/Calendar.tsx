@@ -8,17 +8,21 @@ type Props = {
 }
 const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
   const [open, setOpen] = React.useState(false)
+  const [oraDa, setOraDa] = React.useState('0:00')
+  const [oraA, setOraA] = React.useState('0:00')
 
-  const handleClickOpen = (): void => {
+  const handleClickOpen = (oraDa: string, oraA: string): void => {
     setOpen(true)
+    setOraDa(oraDa)
+    setOraA(oraA)
   }
 
   const handleClose = (): void => {
     setOpen(false)
   }
-  const eventCols = []
+
   const slotNumber = 1440 / timeslot
-  const timeTables = []
+  const times: string[] = []
   for (let i = 0; i < slotNumber; i++) {
     const minutes = timeslot * i
     const m = minutes % 60
@@ -26,26 +30,37 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
     let sm = m.toString()
     if (m < 10) sm = '0' + m
     const time = `${h}:${sm}`
-    timeTables.push(
+    times.push(time)
+  }
+
+  const timeTables = times.map((time) => {
+    return (
       <div key={`timetable${time}`} className={styles.timetable}>
         <span className={styles.timeSpan}>{time}</span>
-      </div>,
+      </div>
     )
-  }
-  for (let i = 0; i < 7; i++) {
-    const eventSlots = []
-    for (let j = 0; j < slotNumber; j++) {
-      eventSlots.push(
-        <div key={`event${i}-${j}`} onClick={handleClickOpen} className={styles.eventSlot}>{`${i}-${j}`}</div>,
-      )
-    }
-    eventCols.push(
-      <div key={`eventCol${i}`} className={styles.eventCol}>
-        {eventSlots}
-      </div>,
-    )
-  }
+  })
+
   const weekDaysString = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+  const eventCols = weekDaysString.map((day) => {
+    const eventSlots = times.map((time, index) => {
+      return (
+        <div
+          key={`event${day}-${time}`}
+          onClick={(): void => handleClickOpen(time, times[(index + 1) % slotNumber])}
+          className={styles.eventSlot}
+        >{`${day}-${time}-${times[(index + 1) % slotNumber]}`}</div>
+      )
+    })
+
+    return (
+      <div key={`eventCol${day}`} className={styles.eventCol}>
+        {eventSlots}
+      </div>
+    )
+  })
+
   const weekDays = weekdays.map((day, i) => {
     return (
       <div key={`${weekDaysString[i]}-${day}`} className={styles.weekday}>
@@ -63,7 +78,7 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
         <div className={styles.timetablesContainer}>{timeTables}</div>
         {eventCols}
       </div>
-      <Modal open={open} handleClose={handleClose}></Modal>
+      <Modal open={open} handleClose={handleClose} oraDa={oraDa} oraA={oraA}></Modal>
     </div>
   )
 }
