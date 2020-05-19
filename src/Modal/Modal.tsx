@@ -13,16 +13,16 @@ import {
 type Props = {
   open: boolean
   handleClose: (event: React.MouseEvent<HTMLButtonElement>) => void
+  oraDa: string
+  oraA: string
 }
 
-const Modal = ({ open, handleClose }: Props): JSX.Element => {
+const Modal = ({ open, handleClose, oraDa, oraA }: Props): JSX.Element => {
   return (
     <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-      <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <DialogTitle id="form-dialog-title">Nuova Visita</DialogTitle>
       <DialogContent>
-        <DialogContentText>
-          To subscribe to this website, please enter your email address here. We will send updates occasionally.
-        </DialogContentText>
+        <DialogContentText>{`ora da: ${oraDa} ora a: ${oraA}`}</DialogContentText>
         <TextField autoFocus margin="dense" id="name" label="Email Address" type="email" fullWidth />
       </DialogContent>
       <DialogActions>
