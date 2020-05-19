@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow, ShallowWrapper } from 'enzyme'
 import Modal from './Modal'
-import { Dialog, DialogTitle, DialogContentText } from '@material-ui/core'
+import { Dialog, DialogTitle, DialogContentText, TextField } from '@material-ui/core'
 
 describe('Calendar', () => {
   let wrapper: ShallowWrapper
@@ -26,5 +26,9 @@ describe('Calendar', () => {
   it('should display the correct time range', () => {
     wrapper.setProps({ oraDa: '10:00', oraA: '10:10' })
     expect(wrapper.find(DialogContentText).text()).toBe('ora da: 10:00 ora a: 10:10')
+  })
+
+  it('should render 7 input', () => {
+    expect(wrapper.find(TextField).length).toBe(7)
   })
 })
