@@ -31,7 +31,7 @@ const VisitaDraggable = ({ width, id, day, time, handleEndDrag }: Props): JSX.El
     }
   }
 
-  const handleDragStop: DraggableEventHandler = (e, ui) => {
+  const handleDragStop: DraggableEventHandler = () => {
     console.log(tempDay)
     console.log(tempTime)
     handleEndDrag(id, tempDay, tempTime)
