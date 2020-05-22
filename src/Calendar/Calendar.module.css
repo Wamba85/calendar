@@ -12,6 +12,13 @@
   display: flex;
 }
 
+.eventSlotConteiner {
+  width: 100%;
+  display: flex;
+  flex: 7 1 0;
+  position: relative;
+}
+
 .eventCol,
 .timetablesContainer {
   flex: 1 1 0;
@@ -21,10 +28,11 @@
 .timetable {
   border-top: 1px solid #dadce0;
   border-right: 1px solid #dadce0;
+  height: 49px;
 }
 
 .timeSpan {
-  font-size: 8px;
+  font-size: 10px;
   position: relative;
   top: -14px;
 }
