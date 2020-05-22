@@ -5,9 +5,10 @@ import Draggable from 'react-draggable'
 
 describe('VisitaDraggable', () => {
   let wrapper: ShallowWrapper
+  const mock = jest.fn()
 
   beforeEach(() => {
-    wrapper = shallow(<VisitaDraggable />)
+    wrapper = shallow(<VisitaDraggable width={500} id={1} day={'Sun'} time={'10:00'} handleEndDrag={mock} />)
   })
 
   afterEach(() => {
