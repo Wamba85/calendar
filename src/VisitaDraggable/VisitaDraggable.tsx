@@ -31,10 +31,11 @@ const VisitaDraggable = ({ width, id, day, time, handleEndDrag }: Props): JSX.El
     }
   }
 
-  const handleDragStop: DraggableEventHandler = () => {
-    console.log(tempDay)
-    console.log(tempTime)
-    handleEndDrag(id, tempDay, tempTime)
+  const handleDragStop: DraggableEventHandler = (e) => {
+    e.stopPropagation()
+    if (window.confirm('Vuoi davvero spostare la visita?')) {
+      handleEndDrag(id, tempDay, tempTime)
+    }
   }
 
   return (
@@ -46,6 +47,7 @@ const VisitaDraggable = ({ width, id, day, time, handleEndDrag }: Props): JSX.El
       bounds={'#eventSlotContainer'}
       onDrag={handleDrag}
       onStop={handleDragStop}
+      position={{ x: 0, y: 0 }}
     >
       <div ref={nodeRef} className={styles.draggableDiv}>{`${day} ${time}`}</div>
     </Draggable>
