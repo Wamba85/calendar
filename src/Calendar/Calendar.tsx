@@ -97,8 +97,8 @@ const Calendar = ({ timeslot = 60, weekdays }: Props): JSX.Element => {
         <div
           key={`event${day}-${time}`}
           ref={day == 'Sun' && index == 0 ? eventSlot : null}
-          onClick={(): void => handleClickOpen(time, times[(index + 1) % slotNumber])}
           className={styles.eventSlot}
+          {...(!visita && { onMouseDown: (): void => handleClickOpen(time, times[(index + 1) % slotNumber]) })}
         >
           {visita && (
             <VisitaDraggable
